@@ -5,7 +5,7 @@
   "description": "Aplikasi PWA responsif untuk demonstrasi template dasar Progressive Web App dengan dukungan offline dan installable.",
   "start_url": "./index.html",
   "scope": "./",
-  "display": "standalone", /cek di manifest document atau edit your manifest/ 
+  "display": "standalone",  
   "background_color": "#4F46E5",
   "theme_color": "#4F46E5",
   "orientation": "portrait",
