@@ -1,135 +1,282 @@
+<!DOCTYPE html>
+<html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-  <meta name="mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-  
-  <meta name="description" content="KupiTulis - Aplikasi Belajar Menulis Tegak Bersambung yang Menyenangkan untuk Anak">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>WuzzChat - Don't save it, just Wuzz it!</title>
+    <link rel="icon" href="icons/logo.png" type="image/png">
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #1a3a5a;
+            --bg: #f9fafb;
+            --text: #1f2937;
+            --white: #ffffff;
+            --gray-light: #e5e7eb;
+            --wa-green: #25D366;
+        }
 
-  <meta name="theme-color" content="#E6DCC3" />
-  
-  <link rel="manifest" href="manifest.json" />
-  
-  <link rel="apple-touch-icon" href="icons/logo fix banget.png">
-  <link rel="icon" href="icons/logo fix banget.png" type="image/png" />
-  
-  <title>KupiTulis - Belajar Menulis Tegak Bersambung</title>
-  
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Quicksand:wght@500;700&display=swap" rel="stylesheet">
+        * {
+            margin: 0; padding: 0; box-sizing: border-box;
+            font-family: 'Quicksand', sans-serif;
+            -webkit-tap-highlight-color: transparent;
+        }
 
-  <link rel="stylesheet" href="assets/style.css" />
-  
-  <style>
-    :root {
-      /* Palet Warna Terbaru KupiTulis */
-      --color-krem-bg: #E6DCC3;     /* Latar belakang ikon */
-      --color-merah-corall: #FF8383; /* Aksen sayap */
-      --color-kuning: #FFF574;      /* Badan kupu-kupu */
-      --color-mint: #A1D6CB;        /* Sayap utama */
-      --color-ungu: #A19AD3;        /* Topi */
-      --color-text: #333333;       /* Warna teks utama */
-    }
+        body {
+            background: var(--bg);
+            color: var(--text);
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
 
-    body {
-      font-family: 'Quicksand', sans-serif;
-      background-color: #FAFAFA; /* Latar belakang aplikasi bersih */
-      color: var(--color-text);
-      margin: 0;
-    }
+        .header {
+            background: var(--primary);
+            color: var(--white);
+            text-align: center;
+            padding: 2.5rem 1rem;
+            border-bottom-left-radius: 2rem;
+            border-bottom-right-radius: 2rem;
+        }
 
-    .header {
-      background-color: var(--color-krem-bg); /* Warna header dari latar ikon */
-      color: var(--color-text);
-      padding: 20px;
-      text-align: center;
-    }
+        .logo-img { width: 100px; height: auto; margin-bottom: 0.8rem; }
+        .tagline { font-size: 0.85rem; opacity: 0.8; margin-top: 0.3rem; }
 
-    .header h1 {
-      font-family: 'Dancing Script', cursive; /* Gaya tulisan sambung */
-      margin: 0;
-      font-size: 2.5em;
-    }
+        .main {
+            flex: 1; display: flex; flex-direction: column;
+            align-items: center; justify-content: center; padding: 1.5rem;
+        }
 
-    .main {
-      padding: 20px;
-    }
+        .card {
+            background: var(--white);
+            border-radius: 1.5rem;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.06);
+            max-width: 420px;
+            width: 100%;
+            padding: 2rem;
+        }
 
-    .card {
-      background: white;
-      border-radius: 15px;
-      padding: 20px;
-      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-      border: 2px solid var(--color-mint); /* Bingkai warna mint */
-    }
+        .input-group { margin-bottom: 1.2rem; }
+        label { display: block; font-size: 0.75rem; font-weight: 700; color: var(--primary); margin-bottom: 0.5rem; text-transform: uppercase; letter-spacing: 0.5px; }
 
-    .card h2 {
-      font-family: 'Dancing Script', cursive;
-      color: var(--color-merah-corall); /* Judul kartu warna coral */
-    }
+        /* INTERNATIONAL SELECT STYLING */
+        .input-wrapper {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
 
-    button {
-      background-color: var(--color-ungu); /* Tombol warna ungu topi */
-      color: white;
-      border: none;
-      padding: 10px 20px;
-      border-radius: 20px;
-      font-family: 'Quicksand', sans-serif;
-      font-weight: 700;
-      cursor: pointer;
-      font-size: 1em;
-    }
+        select {
+            width: 100%;
+            padding: 0.9rem;
+            background: #f3f4f6;
+            border: 2px solid transparent;
+            border-radius: 0.8rem;
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: var(--primary);
+            cursor: pointer;
+        }
 
-    .footer {
-      background-color: var(--color-text);
-      color: white;
-      text-align: center;
-      padding: 10px;
-      position: fixed;
-      bottom: 0;
-      width: 100%;
-    }
-  </style>
+        .num-container {
+            position: relative;
+            width: 100%;
+        }
+
+        input {
+            width: 100%;
+            padding: 0.9rem 1rem;
+            background: #f3f4f6;
+            border: 2px solid transparent;
+            border-radius: 0.8rem;
+            font-size: 1rem;
+            font-weight: 600;
+        }
+
+        input:focus, select:focus {
+            outline: none;
+            border-color: var(--wa-green);
+            background: white;
+        }
+
+        .btn-paste {
+            position: absolute;
+            right: 0.6rem;
+            top: 50%;
+            transform: translateY(-50%);
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 0.5rem 0.8rem;
+            border-radius: 0.6rem;
+            font-size: 0.7rem;
+            font-weight: 700;
+            cursor: pointer;
+        }
+
+        .btn-img-wrapper {
+            width: 75%; border: none; background: none;
+            cursor: pointer; margin-top: 1rem;
+            transition: transform 0.2s ease;
+        }
+
+        .btn-img-wrapper:hover { transform: scale(1.02); }
+        .btn-img-wrapper img { width: 100%; height: auto; display: block; justify-content: center;}
+
+        /* HISTORY AREA */
+        .history-section { margin-top: 2rem; width: 100%; max-width: 420px; text-align: center; }
+        .history-title { font-size: 0.75rem; font-weight: 700; opacity: 0.4; margin-bottom: 1rem; text-transform: uppercase; }
+        .history-list { display: flex; flex-wrap: wrap; gap: 0.6rem; justify-content: center; }
+        .history-item {
+            padding: 0.5rem 1rem; background: white; border-radius: 2rem;
+            font-size: 0.8rem; color: var(--primary); border: 1px solid var(--gray-light);
+            cursor: pointer; font-weight: 600; transition: 0.2s;
+        }
+        .history-item:hover { background: var(--primary); color: white; border-color: var(--primary); }
+
+        .footer { text-align: center; padding: 1.5rem; font-size: 0.75rem; background: var(--gray-light); color: #6b7280; }
+    </style>
 </head>
-
 <body>
-  <header class="header">
-    <h1>KupiTulis</h1>
-    <p>Belajar Tegak Bersambung Jadi Mudah!</p>
-  </header>
 
-  <main class="main">
-    <section class="card">
-      <h2>Halo, Teman Pintar! 🦋</h2>
-      <p>
-        Yuk, mulai petualangan menulismu bersama Si Kupi. Ikuti garisnya dan buat tulisan yang indah!
-      </p>
-      <button onclick="startLearning()">Mulai Belajar</button>
-    </section>
-  </main>
-  
-  <footer class="footer">
-    <p>© 2026 Callista Christy - KupiTulis</p>
-  </footer
+    <header class="header">
+        <img src="icons/logo.png" alt="Logo" class="logo-img">
+        <h1>WuzzChat</h1>
+        <p class="tagline">Don't save it, just Wuzz it!</p>
+    </header>
 
-  <script>
-    // Fungsi sederhana untuk tombol
-    function startLearning() {
-        alert('Siapkan jarimu, kita mulai belajar menulis!');
-    }
+    <main class="main">
+        <div class="card">
+            <div class="input-group">
+                <label>Country & Number</label>
+                <div class="input-wrapper">
+                    <select id="countrySelect"></select>
+                    
+                    <div class="num-container">
+                        <input type="tel" id="waNumber" placeholder="Phone number (e.g. 812345...)">
+                        <button class="btn-paste" onclick="pasteNumber()">PASTE</button>
+                    </div>
+                </div>
+            </div>
 
-    // Registrasi Service Worker untuk PWA
-    if ('serviceWorker' in navigator) {
-      window.addEventListener('load', () => {
-        navigator.serviceWorker.register('./service-worker.js')
-          .then(reg => console.log('KupiTulis SW registered!', reg))
-          .catch(err => console.error('SW gagal:', err));
-      });
-    }
-  </script>
+            <div class="input-group">
+                <label>Message (Optional)</label>
+                <input type="text" id="waMessage" placeholder="Hello, let's chat!">
+            </div>
 
+            <button class="btn-img-wrapper" onclick="launchWuzz()">
+                <img src="icons/wa-button.png" alt="Chat on WhatsApp">
+            </button>
+        </div>
+
+        <div class="history-section" id="historySection" style="display: none;">
+            <p class="history-title">Recent Connections</p>
+            <div class="history-list" id="historyList"></div>
+        </div>
+    </main>
+
+    <footer class="footer">
+        Wuzz • Callista Christy • 2026
+    </footer>
+
+    <script>
+        // 1. DATA NEGARA LENGKAP (Sorted A-Z)
+        const countries = [
+            {n: "Indonesia", c: "62"}, {n: "United States", c: "1"}, {n: "United Kingdom", c: "44"},
+            {n: "Malaysia", c: "60"}, {n: "Singapore", c: "65"}, {n: "Australia", c: "61"},
+            {n: "Japan", c: "81"}, {n: "South Korea", c: "82"}, {n: "India", c: "91"},
+            {n: "Saudi Arabia", c: "966"}, {n: "United Arab Emirates", c: "971"},
+            {n: "Afghanistan", c: "93"}, {n: "Albania", c: "355"}, {n: "Algeria", c: "213"},
+            {n: "Argentina", c: "54"}, {n: "Austria", c: "43"}, {n: "Bangladesh", c: "880"},
+            {n: "Belgium", c: "32"}, {n: "Brazil", c: "55"}, {n: "Canada", c: "1"},
+            {n: "China", c: "86"}, {n: "Egypt", c: "20"}, {n: "France", c: "33"},
+            {n: "Germany", c: "49"}, {n: "Hong Kong", c: "852"}, {n: "Italy", c: "39"},
+            {n: "Netherlands", c: "31"}, {n: "New Zealand", c: "64"}, {n: "Philippines", c: "63"},
+            {n: "Russia", c: "7"}, {n: "Spain", c: "34"}, {n: "Thailand", c: "66"},
+            {n: "Turkey", c: "90"}, {n: "Vietnam", c: "84"}
+            // Kamu bisa tambah lagi di sini, atau biarkan JS memuat daftar standar
+        ].sort((a, b) => a.n.localeCompare(b.n));
+
+        const select = document.getElementById('countrySelect');
+        
+        // Isi Dropdown
+        countries.forEach(country => {
+            const opt = document.createElement('option');
+            opt.value = country.c;
+            opt.textContent = `${country.n} (+${country.c})`;
+            if(country.c === "62") opt.selected = true; // Default Indonesia
+            select.appendChild(opt);
+        });
+
+        // 2. FITUR PASTE
+        async function pasteNumber() {
+            try {
+                const text = await navigator.clipboard.readText();
+                let cleaned = text.replace(/\D/g, '');
+                const currentCode = select.value;
+                
+                if (cleaned.startsWith(currentCode)) cleaned = cleaned.substring(currentCode.length);
+                else if (cleaned.startsWith('0')) cleaned = cleaned.substring(1);
+                
+                if (cleaned) document.getElementById('waNumber').value = cleaned;
+            } catch (err) { console.warn("Clipboard error"); }
+        }
+
+        // 3. FITUR UTAMA
+        function launchWuzz() {
+            const code = select.value;
+            const input = document.getElementById('waNumber');
+            const msgInput = document.getElementById('waMessage');
+            
+            let num = input.value.trim().replace(/\D/g, '');
+            let message = encodeURIComponent(msgInput.value.trim());
+
+            if (!num) return alert("Please enter a phone number!");
+            if (num.startsWith('0')) num = num.substring(1);
+
+            const finalNum = code + num;
+            saveHistory(`+${code}${num}`);
+
+            let url = `https://wa.me/${finalNum}`;
+            if (message) url += `?text=${message}`;
+            window.location.href = url;
+        }
+
+        // 4. SISTEM HISTORY
+        function saveHistory(fullNum) {
+            let history = JSON.parse(localStorage.getItem('wuzz_intl_v2') || '[]');
+            if (!history.includes(fullNum)) {
+                history.unshift(fullNum);
+                if (history.length > 5) history.pop();
+                localStorage.setItem('wuzz_intl_v2', JSON.stringify(history));
+                renderHistory();
+            }
+        }
+
+        function renderHistory() {
+            const history = JSON.parse(localStorage.getItem('wuzz_intl_v2') || '[]');
+            const container = document.getElementById('historySection');
+            const list = document.getElementById('historyList');
+
+            if (history.length > 0) {
+                container.style.display = 'block';
+                list.innerHTML = history.map(num => `<div class="history-item" onclick="useHistory('${num}')">${num}</div>`).join('');
+            }
+        }
+
+        function useHistory(fullNum) {
+            const cleaned = fullNum.replace('+', '');
+            // Deteksi kode negara dari riwayat
+            for (let option of select.options) {
+                if (cleaned.startsWith(option.value)) {
+                    select.value = option.value;
+                    document.getElementById('waNumber').value = cleaned.substring(option.value.length);
+                    break;
+                }
+            }
+        }
+
+        renderHistory();
+    </script>
 </body>
-
 </html>
