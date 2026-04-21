@@ -1,15 +1,16 @@
 {
   "id": "./",
-  "name": "PWA Template Responsif",
-  "short_name": "PWA Demo",
-  "description": "Aplikasi PWA responsif untuk demonstrasi template dasar Progressive Web App dengan dukungan offline dan installable.",
+  "name": "WuzzChat",
+  "short_name": "Wuzz",
+  "description": "Chat WhatsApp tanpa perlu simpan nomor.",
   "start_url": "./index.html",
   "scope": "./",
-  "display": "standalone",  
-  "background_color": "#4F46E5",
-  "theme_color": "#4F46E5",
+  "display": "standalone",
+  "background_color": "#1a3a5a",
+  "theme_color": "#1a3a5a",
   "orientation": "portrait",
   "lang": "id",
+
   "icons": [
     {
       "src": "icons/icon-192x192-A.png",
@@ -22,33 +23,6 @@
       "type": "image/png"
     }
   ],
-  "screenshots": [
-    {
-      "src": "icons/screenshot1.png",
-      "sizes": "1080x1920",
-      "type": "image/png"
-    },
-    {
-      "src": "icons/screenshot2.png",
-      "sizes": "1080x1920",
-      "type": "image/png"
-    }
-  ],
-  "shortcuts": [
-    {
-      "name": "Buka Beranda",
-      "short_name": "Home",
-      "url": "./index.html",
-      "icons": [
-        {
-          "src": "icons/icon-192x192-A.png",
-          "sizes": "192x192"
-        }
-      ]
-    }
-  ],
-  "categories": [
-    "productivity",
-    "utilities"
-  ]
+
+  "prefer_related_applications": false
 }
