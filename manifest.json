@@ -5,6 +5,7 @@
   "description": "Kirim pesan WhatsApp secara instan tanpa perlu simpan nomor. Mendukung kode negara internasional dengan fitur riwayat cepat.",
   "start_url": "./index.html",
   "display": "standalone",
+  "display_override": ["standalone", "minimal-ui", "browser"],
   "background_color": "#1a3a5a",
   "theme_color": "#1a3a5a",
   "orientation": "portrait",
