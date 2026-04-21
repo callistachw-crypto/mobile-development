@@ -1,28 +1,46 @@
 {
-  "id": "./",
-  "name": "WuzzChat",
-  "short_name": "Wuzz",
-  "description": "Chat WhatsApp tanpa perlu simpan nomor.",
+  "name": "WuzzChat - Direct WhatsApp International",
+  "short_name": "WuzzChat",
+  "description": "Kirim pesan WhatsApp secara instan tanpa perlu simpan nomor. Mendukung kode negara internasional dengan fitur riwayat cepat.",
   "start_url": "./index.html",
-  "scope": "./",
   "display": "standalone",
   "background_color": "#1a3a5a",
   "theme_color": "#1a3a5a",
   "orientation": "portrait",
-  "lang": "id",
-
+  "categories": [
+    "utilities",
+    "productivity",
+    "communication"
+  ],
+  "iarc_rating_id": "e58c1174-81d2-4380-9993-9442ef572e92",
   "icons": [
     {
-      "src": "icons/icon-192x192-A.png",
+      "src": "icons/logo 192x192.png",
       "sizes": "192x192",
-      "type": "image/png"
+      "type": "image/png",
+      "purpose": "any"
     },
     {
-      "src": "icons/icon-512x512-B.png",
+      "src": "icons/logo 512x512.png",
       "sizes": "512x512",
-      "type": "image/png"
+      "type": "image/png",
+      "purpose": "any"
     }
   ],
-
-  "prefer_related_applications": false
+  "screenshots": [
+    {
+      "src": "screenshoot1.png",
+      "sizes": "335x745",
+      "type": "image/png",
+      "form_factor": "narrow",
+      "label": "Tampilan Mobile WuzzChat"
+    },
+    {
+      "src": "screenshoot2.png",
+      "sizes": "666x374",
+      "type": "image/png",
+      "form_factor": "wide",
+      "label": "Tampilan Desktop WuzzChat"
+    }
+  ]
 }
