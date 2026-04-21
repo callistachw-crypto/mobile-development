@@ -1,0 +1,1 @@
+# TODO for Adding 'launch_handler' to manifest.json (Completed)\n\n- [x] Step 1: Add launch_handler to manifest.json (\\\"launch_mode\\\": \\\"focus\\\" for single-instance)\n- [x] Step 2: Validate PWA launch behavior\n- [x] Step 3: Complete task\n\n**Implemented: Navigations now focus existing PWA instance instead of opening new tabs/windows.**
