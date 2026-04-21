@@ -1,2 +1,48 @@
-const CACHE_NAME = "wuzzchat-offline-v1\";\nconst urlsToCache = [\n  \"/\",\n  \"/index.html\",\n  \"/manifest.json\",\n  \"/icons/logo 192x192.png\",\n  \"/icons/logo 512x512.png\",\n  \"/icons/wa-button.png\",\n  \"/assets/style.css\",\n  \"/icons/screenshoot1.png\",\n  \"/icons/screenshoot2.png\"\n];\n\nself.addEventListener('install', event => {\n  self.skipWaiting();\n  event.waitUntil(\n    caches.open(CACHE_NAME)\n      .then(cache => cache.addAll(urlsToCache))\n  );\n});\n\nself.addEventListener('activate', event => {\n  event.waitUntil(\n    caches.keys().then(cacheNames => \n      Promise.all(\n        cacheNames.map(cacheName => {\n          if (cacheName !== CACHE_NAME) {\n            return caches.delete(cacheName);\n          }\n        })\n      )\n    )\n  );\n});\n\nself.addEventListener('fetch', event => {\n  event.respondWith(\n    caches.match(event.request)\n      .then(response => {\n        // Return cached version or fetch from network\n        return response || fetch(event.request).catch(() => {\n          // Offline fallback for HTML\n          if (event.request.destination === 'document') {\n            return caches.match('/index.html');\n          }\n        });\n      })\n  );\n});"
+const CACHE_NAME = "wuzzchat-G2ak";
 
+// Perbaikan: Mendefinisikan variabel yang tadi hilang/terpotong
+const ASSETS_TO_CACHE = [
+  "./",
+  "./index.html",
+  "./manifest.json",
+  "./icons/logo 192x192.png",      
+  "./icons/wa-button.png",
+  "./icons/screenshoot1.png"
+];
+
+// 1. INSTALL: Simpan file ke memori HP
+self.addEventListener('install', event => {
+  self.skipWaiting();
+  event.waitUntil(
+    caches.open(CACHE_NAME).then(cache => {
+      console.log('SW: Mengamankan aset ke cache...');
+      return cache.addAll(ASSETS_TO_CACHE);
+    })
+  );
+});
+
+// 2. ACTIVATE: Hapus cache lama kalau ada update
+self.addEventListener('activate', event => {
+  event.waitUntil(
+    caches.keys().then(keys => {
+      return Promise.all(
+        keys.map(key => {
+          if (key !== CACHE_NAME) return caches.delete(key);
+        })
+      );
+    })
+  );
+});
+
+// 3. FETCH: Logic Offline
+self.addEventListener('fetch', event => {
+  event.respondWith(
+    caches.match(event.request).then(cachedResponse => {
+      return cachedResponse || fetch(event.request).catch(() => {
+        if (event.request.mode === 'navigate') {
+          return caches.match('./index.html');
+        }
+      });
+    })
+  );
+});
