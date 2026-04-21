@@ -282,7 +282,7 @@
     </script>
     <script>
       if ('serviceWorker' in navigator) {
-        navigator.serviceWorker.register('/mobile-development/service-worker.js')
+        navigator.serviceWorker.register('/mobile-development/sw.js')
           .then(reg => console.log('SW OK:', reg.scope))
           .catch(err => console.log('SW ERROR:', err));
       }
