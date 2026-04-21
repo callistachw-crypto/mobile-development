@@ -14,6 +14,7 @@
     "communication"
   ],
   "iarc_rating_id": "e58c1174-81d2-4380-9993-9442ef572e92",
+  "prefer_related_applications": false,
   "icons": [
     {
       "src": "icons/logo 192x192.png",
