@@ -16,29 +16,22 @@
     "communication"
   ],
   "iarc_rating_id": "e58c1174-81d2-4380-9993-9442ef572e92",
-  "related_applications": [
-    {
-      "platform": "play",
-      "url": "https://play.google.com/store/apps/details?id=com.whatsapp",
-      "id": "com.whatsapp"
-    }
-  ],
   "prefer_related_applications": false,
   "icons": [
     {
       "src": "icons/logo 192x192.png",
       "sizes": "192x192",
       "type": "image/png",
-      "purpose": "any"
+      "purpose": "any maskable"
     },
     {
       "src": "icons/logo 512x512.png",
       "sizes": "512x512",
       "type": "image/png",
-      "purpose": "any"
+      "purpose": "maskable"
     }
   ],
-  "screenshots": 
+  "screenshots": [
     {
       "src": "icons/screenshoot1.png",
       "sizes": "335x745",
@@ -46,11 +39,12 @@
       "form_factor": "narrow",
       "label": "Tampilan Mobile WuzzChat"
     },
+    {
       "src": "icons/screenshoot2.png",
       "sizes": "666x374",
       "type": "image/png",
       "form_factor": "wide",
       "label": "Tampilan Desktop WuzzChat"
     }
-  
-
+  ]
+}
