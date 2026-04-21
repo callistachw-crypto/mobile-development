@@ -1,74 +1,80 @@
-const CACHE_NAME = "pwa-template-v2";
+const CACHE_NAME = "wuzzchat-v1";
 const BASE_URL = self.registration.scope;
 
+// Daftar aset yang WAJIB ada supaya aplikasi bisa jalan offline
 const urlsToCache = [
   `${BASE_URL}`,
   `${BASE_URL}index.html`,
-  `${BASE_URL}offline.html`,
-  `${BASE_URL}assets/style.css`,
+  `${BASE_URL}logo.png`,      // Pastikan nama file sesuai folder kamu
+  `${BASE_URL}wa-button.png`, // Tombol WhatsApp hijau yang kamu upload
   `${BASE_URL}manifest.json`,
-  `${BASE_URL}icons/icon-192x192.png`,
-  `${BASE_URL}icons/icon-512x512.png`,
+  // Jika kamu punya file offline.html silakan aktifkan baris bawah
+  // `${BASE_URL}offline.html`, 
 ];
 
-// Install Service Worker & simpan file ke cache
-self.addEventListener("install", event => {
-  self.skipWaiting(); // langsung aktif tanpa reload manual
+// Install Service Worker
+self.addEventListener("install", (event) => {
+  self.skipWaiting();
   event.waitUntil(
-    caches.open(CACHE_NAME)
-      .then(cache => cache.addAll(urlsToCache))
-      .catch(err => console.error("Cache gagal dimuat:", err))
+    caches.open(CACHE_NAME).then((cache) => {
+      console.log("WuzzChat: Mempersiapkan cache aset...");
+      return cache.addAll(urlsToCache);
+    })
   );
 });
 
-// Aktivasi dan hapus cache lama
-self.addEventListener("activate", event => {
+// Aktivasi & Bersihkan Cache Lama
+self.addEventListener("activate", (event) => {
   event.waitUntil(
-    (async () => {
-      const keys = await caches.keys();
-      await Promise.all(
-        keys.map(key => {
+    caches.keys().then((keys) => {
+      return Promise.all(
+        keys.map((key) => {
           if (key !== CACHE_NAME) {
-            console.log("Menghapus cache lama:", key);
+            console.log("WuzzChat: Menghapus cache usang:", key);
             return caches.delete(key);
           }
         })
       );
-      await self.clients.claim(); // langsung klaim kontrol ke halaman
-    })()
+    }).then(() => self.clients.claim())
   );
 });
 
-// Fetch event: cache-first untuk file lokal, network-first untuk API
-self.addEventListener("fetch", event => {
+// Strategi Fetch: Cache-First untuk kecepatan maksimal
+self.addEventListener("fetch", (event) => {
   const request = event.request;
   const url = new URL(request.url);
 
-  // Abaikan permintaan Chrome Extension, analytics, dll.
-  if (url.protocol.startsWith("chrome-extension")) return;
+  // Abaikan request selain GET (seperti analytics atau extension)
   if (request.method !== "GET") return;
 
-  // File lokal (statis)
-  if (url.origin === self.location.origin) {
-    event.respondWith(
-      caches.match(request).then(response => {
-        return (
-          response ||
-          fetch(request).catch(() => caches.match(`${BASE_URL}offline.html`))
-        );
-      })
-    );
-  } 
-  // Resource eksternal (API, CDN, dsb.)
-  else {
-    event.respondWith(
-      fetch(request)
-        .then(networkResponse => {
-          const clone = networkResponse.clone();
-          caches.open(CACHE_NAME).then(cache => cache.put(request, clone));
+  event.respondWith(
+    caches.match(request).then((cachedResponse) => {
+      // Jika ada di cache, langsung berikan (Sangat Cepat)
+      if (cachedResponse) {
+        return cachedResponse;
+      }
+
+      // Jika tidak ada, ambil dari internet
+      return fetch(request)
+        .then((networkResponse) => {
+          // Jika request sukses dan asalnya dari domain kita atau Google Fonts, simpan ke cache
+          if (
+            networkResponse.status === 200 &&
+            (url.origin === self.location.origin || url.host === "fonts.gstatic.com" || url.host === "fonts.googleapis.com")
+          ) {
+            const responseToCache = networkResponse.clone();
+            caches.open(CACHE_NAME).then((cache) => {
+              cache.put(request, responseToCache);
+            });
+          }
           return networkResponse;
         })
-        .catch(() => caches.match(request))
-    );
-  }
+        .catch(() => {
+          // Jika offline dan aset tidak ada di cache sama sekali
+          if (request.mode === 'navigate') {
+            return caches.match(`${BASE_URL}index.html`);
+          }
+        });
+    })
+  );
 });
