@@ -1,0 +1,1 @@
+# TODO for PWA Offline Support (Completed)\n\n- [x] Update service-worker.js with full asset caching and offline fallback\n- [x] Fix SW registration path in index.html\n- [x] Test offline functionality\n\n**PWA now works offline: caches all assets, serves from cache, falls back to index.html**
