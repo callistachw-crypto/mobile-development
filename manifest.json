@@ -1,5 +1,6 @@
 {
   "id": "com.wuzzchat.international",
+  "scope": "/",
   "name": "WuzzChat - Direct WhatsApp International",
   "short_name": "WuzzChat",
   "description": "Kirim pesan WhatsApp secara instan tanpa perlu simpan nomor. Mendukung kode negara internasional dengan fitur riwayat cepat.",
@@ -37,7 +38,7 @@
       "purpose": "any"
     }
   ],
-  "screenshots": [
+  "screenshots": 
     {
       "src": "icons/screenshoot1.png",
       "sizes": "335x745",
@@ -45,12 +46,11 @@
       "form_factor": "narrow",
       "label": "Tampilan Mobile WuzzChat"
     },
-    {
       "src": "icons/screenshoot2.png",
       "sizes": "666x374",
       "type": "image/png",
       "form_factor": "wide",
       "label": "Tampilan Desktop WuzzChat"
     }
-  ]
-}
+  
+
