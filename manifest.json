@@ -29,14 +29,14 @@
   ],
   "screenshots": [
     {
-      "src": "screenshoot1.png",
+      "src": "icons/screenshoot1.png",
       "sizes": "335x745",
       "type": "image/png",
       "form_factor": "narrow",
       "label": "Tampilan Mobile WuzzChat"
     },
     {
-      "src": "screenshoot2.png",
+      "src": "icons/screenshoot2.png",
       "sizes": "666x374",
       "type": "image/png",
       "form_factor": "wide",
