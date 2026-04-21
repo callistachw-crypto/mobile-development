@@ -1,5 +1,6 @@
 {
   "lang": "en",
+  "dir": "ltr",
   "id": "com.wuzzchat.international",
   "scope": "/",
   "name": "WuzzChat - Direct WhatsApp International",
@@ -11,11 +12,7 @@
   "background_color": "#1a3a5a",
   "theme_color": "#1a3a5a",
   "orientation": "portrait",
-  "categories": [
-    "utilities",
-    "productivity",
-    "communication"
-  ],
+  "categories": ["utilities", "productivity", "communication"],
   "iarc_rating_id": "e58c1174-81d2-4380-9993-9442ef572e92",
   "related_applications": [
     {
