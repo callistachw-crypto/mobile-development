@@ -1,0 +1,1 @@
+# TODO for Adding 'shortcuts' to manifest.json (Completed)\n\n- [x] Step 1: Add shortcuts array to manifest.json\n- [x] Step 2: Update index.html to handle URL params/hashes for shortcuts\n- [x] Step 3: Validate PWA features (jumplists on Windows/Android home screen)\n- [x] Step 4: Complete task\n\n**Plan Approved and Implemented**

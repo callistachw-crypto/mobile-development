@@ -278,8 +278,7 @@
             }
         }
 
-        renderHistory();
-    </script>
+        // Handle PWA shortcuts\n        const urlParams = new URLSearchParams(window.location.search);\n        const hash = window.location.hash;\n        if (urlParams.has('country')) {\n            const countryCode = urlParams.get('country');\n            Array.from(select.options).forEach(opt => {\n                if (opt.value === countryCode) opt.selected = true;\n            });\n        }\n        if (hash === '#history') {\n            document.getElementById('historySection').style.display = 'block';\n        }\n        renderHistory();\n    </script>\n
     <script>
       if ('serviceWorker' in navigator) {
         navigator.serviceWorker.register('/mobile-development/sw.js')
