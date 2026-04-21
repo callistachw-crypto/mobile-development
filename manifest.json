@@ -1,55 +1,53 @@
-{
-  "lang": "en",
-  "dir": "ltr",
-  "id": "com.wuzzchat.international",
-  "scope": "/",
-  "name": "WuzzChat - Direct WhatsApp International",
-  "short_name": "WuzzChat",
-  "description": "Kirim pesan WhatsApp secara instan tanpa perlu simpan nomor. Mendukung kode negara internasional dengan fitur riwayat cepat.",
-  "start_url": "./index.html",
-  "display": "standalone",
-  "display_override": ["standalone", "minimal-ui", "browser"],
-  "background_color": "#1a3a5a",
-  "theme_color": "#1a3a5a",
-  "orientation": "portrait",
-  "categories": ["utilities", "productivity", "communication"],
-  "iarc_rating_id": "e58c1174-81d2-4380-9993-9442ef572e92",
-  "related_applications": [
-    {
-      "platform": "play",
-      "url": "https://play.google.com/store/apps/details?id=com.whatsapp",
-      "id": "com.whatsapp"
+{"lang":"en",
+  "dir":"ltr",
+  "id":"com.wuzzchat.international",
+  "scope":"/","scope_extensions":["https://wa.me"],
+  "name":"WuzzChat - Direct WhatsApp International",
+  "short_name":"WuzzChat",
+  "description":"Kirim pesan WhatsApp secara instan tanpa perlu simpan nomor. Mendukung kode negara internasional dengan fitur riwayat cepat.",
+  "start_url":"./index.html",
+  "display":"standalone",
+  "display_override":["standalone","minimal-ui","browser"],
+  "background_color":"#1a3a5a",
+  "theme_color":"#1a3a5a",
+  "orientation":"portrait",
+  "categories":["utilities","productivity","communication"],
+  "iarc_rating_id":"e58c1174-81d2-4380-9993-9442ef572e92",
+  "related_applications":[
+    {"platform":"play",
+    "url":"https://play.google.com/store/apps/details?id=com.whatsapp",
+    "id":"com.whatsapp"
     }
-  ],
-  "prefer_related_applications": false,
-  "icons": [
-    {
-      "src": "icons/logo 192x192.png",
-      "sizes": "192x192",
-      "type": "image/png",
-      "purpose": "any"
-    },
-    {
-      "src": "icons/logo 512x512.png",
-      "sizes": "512x512",
-      "type": "image/png",
-      "purpose": "any"
-    }
-  ],
-  "screenshots": [
-    {
-      "src": "icons/screenshoot1.png",
-      "sizes": "335x745",
-      "type": "image/png",
-      "form_factor": "narrow",
-      "label": "Tampilan Mobile WuzzChat"
-    },
-    {
-      "src": "icons/screenshoot2.png",
-      "sizes": "666x374",
-      "type": "image/png",
-      "form_factor": "wide",
-      "label": "Tampilan Desktop WuzzChat"
-    }
-  ]
-}
+    ],
+    "prefer_related_applications":false,
+    "icons":[
+      {
+        "src":"icons/logo 192x192.png",
+        "sizes":"192x192",
+        "type":"image/png",
+        "purpose":"any"
+        },
+        {
+          "src":"icons/logo 512x512.png",
+          "sizes":"512x512",
+          "type":"image/png",
+          "purpose":"any"
+          }
+          ],
+          "screenshots":[
+          {
+            "src":"icons/screenshoot1.png",
+            "sizes":"335x745",
+            "type":"image/png",
+            "form_factor":"narrow",
+            "label":"Tampilan Mobile WuzzChat"
+            },
+            {
+            "src":"icons/screenshoot2.png",
+            "sizes":"666x374",
+            "type":"image/png",
+            "form_factor":"wide",
+            "label":"Tampilan Desktop WuzzChat"
+            }
+            ]
+          }
