@@ -77,3 +77,34 @@ button:hover {
     font-size: 1.25rem;
   }
 }
+/* NOTE MODE */
+body.note-mode .header {
+  padding: 1.5rem 1rem;
+}
+
+body.note-mode .card {
+  padding: 1.5rem;
+}
+
+body.note-mode #countrySelect,
+body.note-mode .num-container {
+  display: none;
+}
+
+body.note-mode label {
+  text-align: center;
+}
+
+body.note-mode #waMessage {
+  height: 150px;
+  font-size: 1rem;
+}
+
+body.note-mode .btn-img-wrapper {
+  width: 100%;
+}
+
+body.note-mode .history-section,
+body.note-mode .push-section {
+  display: none;
+}
