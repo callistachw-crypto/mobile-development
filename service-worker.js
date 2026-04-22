@@ -155,3 +155,23 @@ self.addEventListener('sync', event => {
     }).catch(console.error));
   }
 });
+
+// 7. PERIODIC BACKGROUND SYNC - Daily fresh data
+const PERIODIC_DB_STORE = 'periodic-data';
+
+self.addEventListener('periodicsync', event => {
+  if (event.tag === 'whatsapp-data') {
+    event.waitUntil(openDB().then(() => {
+      // Mock API data fetch
+      return fetch('https://mockapi.wuzzchat/data/trends').catch(() => ({
+        countries: [], trends: ['Popular chat starters...']
+      })).then(resp => resp.json()).then(data => {
+        const tx = db.transaction([STORE_NAME, PERIODIC_DB_STORE], 'readwrite');
+        tx.objectStore(PERIODIC_DB_STORE).put({
+          lastSync: Date.now(),
+          data: data
+        });
+      });
+    }).catch(console.error));
+  }
+});
