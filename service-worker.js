@@ -1,4 +1,4 @@
-const CACHE_NAME = "wuzzchat-v5";
+const CACHE_NAME = "wuzzchat-v7"; // ⬅️ WAJIB ganti versi
 const DB_NAME = "WuzzQueue";
 const STORE_NAME = "whatsapp";
 const PERIODIC_DB_STORE = "periodic-data";
@@ -26,9 +26,7 @@ const ASSETS_TO_CACHE = [
 self.addEventListener("install", event => {
   self.skipWaiting();
   event.waitUntil(
-    caches.open(CACHE_NAME).then(cache => {
-      return cache.addAll(ASSETS_TO_CACHE);
-    })
+    caches.open(CACHE_NAME).then(cache => cache.addAll(ASSETS_TO_CACHE))
   );
 });
 
@@ -49,23 +47,32 @@ self.addEventListener("activate", event => {
 });
 
 // ======================
-// FETCH (Stale While Revalidate)
+// FETCH (FIXED)
 // ======================
 self.addEventListener("fetch", event => {
+  // ❌ jangan cache request aneh (WA, external API, dll)
+  if (event.request.method !== "GET") return;
+
   event.respondWith(
     caches.match(event.request).then(cachedResponse => {
 
       const fetchPromise = fetch(event.request)
-        .then(response => {
-          const responseClone = response.clone();
+        .then(networkResponse => {
+          // ❗ hanya cache kalau response valid
+          if (!networkResponse || networkResponse.status !== 200 || networkResponse.type !== "basic") {
+            return networkResponse;
+          }
+
+          const responseClone = networkResponse.clone();
 
           caches.open(CACHE_NAME).then(cache => {
             cache.put(event.request, responseClone);
           });
 
-          return response;
+          return networkResponse;
         })
         .catch(() => {
+          // ✅ fallback offline untuk halaman
           if (event.request.mode === "navigate") {
             return caches.match("./offline.html");
           }
@@ -100,9 +107,7 @@ self.addEventListener("push", event => {
     } catch {}
   }
 
-  event.waitUntil(
-    self.registration.showNotification(title, options)
-  );
+  event.waitUntil(self.registration.showNotification(title, options));
 });
 
 // ======================
@@ -168,7 +173,7 @@ self.addEventListener("message", event => {
       });
 
       tx.oncomplete = () => {
-        event.ports[0].postMessage("queued");
+        event.ports[0]?.postMessage("queued");
 
         if ("sync" in self.registration) {
           self.registration.sync.register("whatsapp-sync");
@@ -191,13 +196,10 @@ self.addEventListener("sync", event => {
           const request = store.getAll();
 
           request.onsuccess = () => {
-            const items = request.result;
-
-            items.forEach(item => {
+            request.result.forEach(item => {
               clients.openWindow(item.url);
               store.delete(item.id);
             });
-
             resolve();
           };
         });
