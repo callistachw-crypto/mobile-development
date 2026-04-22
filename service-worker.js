@@ -1,4 +1,4 @@
-const CACHE_NAME = "wuzzchat-v8"; // ⬅️ WAJIB ganti versi
+const CACHE_NAME = "wuzzchat-v9"; 
 const DB_NAME = "WuzzQueue";
 const STORE_NAME = "whatsapp";
 const PERIODIC_DB_STORE = "periodic-data";
