@@ -100,3 +100,58 @@ self.addEventListener('notificationclick', function(event) {
     })
   );
 });
+
+// 6. BACKGROUND SYNC - Queue WhatsApp launches for online retry
+let db;
+const DB_NAME = 'WuzzQueue';
+const STORE_NAME = 'whatsapp';
+
+function openDB() {
+  return new Promise((resolve, reject) => {
+    const request = indexedDB.open(DB_NAME, 1);
+    request.onerror = () => reject(request.error);
+    request.onsuccess = () => {
+      db = request.result;
+      resolve(db);
+    };
+    request.onupgradeneeded = (e) => {
+      db = e.target.result;
+      if (!db.objectStoreNames.contains(STORE_NAME)) {
+        db.createObjectStore(STORE_NAME, { keyPath: 'id', autoIncrement: true });
+      }
+    };
+  });
+}
+
+// Queue WhatsApp URL from client
+self.addEventListener('message', event => {
+  if (event.data.type === 'QUEUE_WHATSAPP') {
+    openDB().then(() => {
+      const tx = db.transaction(STORE_NAME, 'readwrite');
+      const store = tx.objectStore(STORE_NAME);
+      store.add({ url: event.data.url, timestamp: Date.now() });
+      tx.oncomplete = () => {
+        event.ports[0].postMessage('queued');
+        if ('sync' in self.registration) {
+          self.registration.sync.register('whatsapp-sync');
+        }
+      };
+    });
+  }
+});
+
+// Process queued WhatsApp launches when online
+self.addEventListener('sync', event => {
+  if (event.tag === 'whatsapp-sync') {
+    event.waitUntil(openDB().then(() => {
+      const tx = db.transaction(STORE_NAME, 'readwrite');
+      const store = tx.objectStore(STORE_NAME);
+      return store.getAll().then(items => {
+        items.forEach(item => {
+          clients.openWindow(item.url);
+          store.delete(item.id);
+        });
+      });
+    }).catch(console.error));
+  }
+});

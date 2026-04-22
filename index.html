@@ -249,7 +249,7 @@
         }
 
         // 3. FITUR UTAMA
-        function launchWuzz() {
+        async function launchWuzz() {
             const code = select.value;
             const input = document.getElementById('waNumber');
             const msgInput = document.getElementById('waMessage');
@@ -265,7 +265,21 @@
 
             let url = `https://wa.me/${finalNum}`;
             if (message) url += `?text=${message}`;
-            window.location.href = url;
+
+            // Try direct open
+            try {
+                const controller = await navigator.serviceWorker.ready;
+                await fetch(url, {mode: 'no-cors'});
+                window.open(url, '_blank');
+            } catch {
+                // Queue for background sync
+                controller.postMessage({
+                    type: 'QUEUE_WHATSAPP',
+                    url: url
+                }, [controller.postMessage.bind(controller)]).then(() => {
+                    alert('Queued! Will open WhatsApp when online.');
+                });
+            }
         }
 
         // 4. SISTEM HISTORY
