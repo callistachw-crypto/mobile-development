@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-    <title>WuzzChat</title>
+    <title>WuzzChat - Push Ready</title>
     <link rel="manifest" href="manifest.json">
     <meta name="theme-color" content="#1a3a5a">
     <link rel="icon" href="icons/logo 192x192.png" type="image/png">
@@ -61,14 +61,13 @@
         .input-group { margin-bottom: 1.2rem; }
         label { display: block; font-size: 0.75rem; font-weight: 700; color: var(--primary); margin-bottom: 0.5rem; text-transform: uppercase; letter-spacing: 0.5px; }
 
-        /* INTERNATIONAL SELECT STYLING */
         .input-wrapper {
             display: flex;
             flex-direction: column;
             gap: 10px;
         }
 
-        select {
+        select, input {
             width: 100%;
             padding: 0.9rem;
             background: #f3f4f6;
@@ -77,28 +76,17 @@
             font-size: 0.9rem;
             font-weight: 600;
             color: var(--primary);
-            cursor: pointer;
-        }
-
-        .num-container {
-            position: relative;
-            width: 100%;
-        }
-
-        input {
-            width: 100%;
-            padding: 0.9rem 1rem;
-            background: #f3f4f6;
-            border: 2px solid transparent;
-            border-radius: 0.8rem;
-            font-size: 1rem;
-            font-weight: 600;
         }
 
         input:focus, select:focus {
             outline: none;
             border-color: var(--wa-green);
             background: white;
+        }
+
+        .num-container {
+            position: relative;
+            width: 100%;
         }
 
         .btn-paste {
@@ -125,7 +113,6 @@
         .btn-img-wrapper:hover { transform: scale(1.02); }
         .btn-img-wrapper img { width: 100%; height: auto; display: block; justify-content: center;}
 
-        /* HISTORY AREA */
         .history-section { margin-top: 2rem; width: 100%; max-width: 420px; text-align: center; }
         .history-title { font-size: 0.75rem; font-weight: 700; opacity: 0.4; margin-bottom: 1rem; text-transform: uppercase; }
         .history-list { display: flex; flex-wrap: wrap; gap: 0.6rem; justify-content: center; }
@@ -136,21 +123,21 @@
         }
         .history-item:hover { background: var(--primary); color: white; border-color: var(--primary); }
 
-        .footer { text-align: center; padding: 1.5rem; font-size: 0.75rem; background: var(--gray-light); color: #6b7280; }
-
-        /* PUSH NOTIFICATION STYLES */
-        .push-section { margin-top: 2rem; width: 100%; max-width: 420px; text-align: center; }
-        .push-title { font-size: 0.75rem; font-weight: 700; opacity: 0.6; margin-bottom: 1rem; text-transform: uppercase; }
+        .push-section { margin-top: 2rem; width: 100%; max-width: 420px; text-align: center; background: #f0f9ff; padding: 1.5rem; border-radius: 1.5rem; }
+        .push-title { font-size: 0.85rem; font-weight: 700; margin-bottom: 1rem; text-transform: uppercase; color: var(--primary); }
         #pushStatus { font-size: 0.8rem; margin-bottom: 0.8rem; padding: 0.6rem; border-radius: 1rem; font-weight: 600; }
         .push-enabled { background: #dcfce7; color: #166534; border: 1px solid #bbf7d0; }
         .push-disabled { background: #fef2f2; color: #991b1b; border: 1px solid #fecaca; }
         #togglePush { 
             background: var(--primary); color: white; border: none; padding: 0.8rem 2rem; 
             border-radius: 2rem; font-size: 0.85rem; font-weight: 700; cursor: pointer; 
-            transition: all 0.2s;
+            transition: all 0.2s; margin: 0.5rem 0;
         }
         #togglePush:hover:not(:disabled) { background: #1e4a6b; transform: scale(1.02); }
         #togglePush:disabled { background: #9ca3af; cursor: not-allowed; }
+
+        .test-push { background: var(--wa-green); margin-top: 1rem; }
+        .footer { text-align: center; padding: 1.5rem; font-size: 0.75rem; background: var(--gray-light); color: #6b7280; }
     </style>
 </head>
 <body>
@@ -158,7 +145,7 @@
     <header class="header">
         <img src="icons/logo 192x192.png" alt="Logo" class="logo-img">
         <h1>WuzzChat</h1>
-        <p class="tagline">Don't save it, just Wuzz it!</p>
+        <p class="tagline">Push Notifications Ready!</p>
     </header>
 
     <main class="main">
@@ -167,7 +154,6 @@
                 <label>Country & Number</label>
                 <div class="input-wrapper">
                     <select id="countrySelect"></select>
-                    
                     <div class="num-container">
                         <input type="tel" id="waNumber" placeholder="Phone number (e.g. 812345...)">
                         <button class="btn-paste" onclick="pasteNumber()">PASTE</button>
@@ -190,125 +176,161 @@
             <div class="history-list" id="historyList"></div>
         </div>
 
-        <!-- PUSH NOTIFICATIONS SECTION -->
         <div class="push-section" id="pushSection">
-            <p class="push-title">Stay Updated</p>
-            <div id="pushStatus" class="push-disabled">Notifications disabled</div>
-            <button id="togglePush">Enable Notifications</button>
-            <small style="opacity: 0.6; font-size: 0.7rem; margin-top: 0.5rem; display: block;">
-                Get timely reminders for new chats even when app is closed
+            <p class="push-title">🔔 Push Notifications</p>
+            <div id="pushStatus" class="push-disabled">Notifications off</div>
+            <button id="togglePush">Enable Push</button>
+            <small style="opacity: 0.7; font-size: 0.7rem; display: block; margin-top: 0.8rem;">
+                Get notified even when app closed! Test with DevTools → Application → Push Messaging → Send Test Message
             </small>
+            <button id="testPush" class="test-push" style="display:none;">Test Mock Push</button>
         </div>
     </main>
 
     <footer class="footer">
-        Wuzz • Callista Christy • 2026
+        WuzzChat • Push Ready • Reload SW to test
     </footer>
 
     <script>
-        // 1. DATA NEGARA LENGKAP (Sorted A-Z)
+        // COUNTRIES (shortened)
         const countries = [
-            {n: "Indonesia", c: "62"}, {n: "United States", c: "1"}, {n: "United Kingdom", c: "44"},
-            {n: "Malaysia", c: "60"}, {n: "Singapore", c: "65"}, {n: "Australia", c: "61"},
-            {n: "Japan", c: "81"}, {n: "South Korea", c: "82"}, {n: "India", c: "91"},
-            {n: "Saudi Arabia", c: "966"}, {n: "United Arab Emirates", c: "971"},
-            {n: "Afghanistan", c: "93"}, {n: "Albania", c: "355"}, {n: "Algeria", c: "213"},
-            {n: "Argentina", c: "54"}, {n: "Austria", c: "43"}, {n: "Bangladesh", c: "880"},
-            {n: "Belgium", c: "32"}, {n: "Brazil", c: "55"}, {n: "Canada", c: "1"},
-            {n: "China", c: "86"}, {n: "Egypt", c: "20"}, {n: "France", c: "33"},
-            {n: "Germany", c: "49"}, {n: "Hong Kong", c: "852"}, {n: "Italy", c: "39"},
-            {n: "Netherlands", c: "31"}, {n: "New Zealand", c: "64"}, {n: "Philippines", c: "63"},
-            {n: "Russia", c: "7"}, {n: "Spain", c: "34"}, {n: "Thailand", c: "66"},
-            {n: "Turkey", c: "90"}, {n: "Vietnam", c: "84"}
-            // Kamu bisa tambah lagi di sini, atau biarkan JS memuat daftar standar
+            {n: "Indonesia", c: "62"}, {n: "United States", c: "1"}, {n: "Malaysia", c: "60"}
         ].sort((a, b) => a.n.localeCompare(b.n));
 
         const select = document.getElementById('countrySelect');
-        
-        // Isi Dropdown
         countries.forEach(country => {
             const opt = document.createElement('option');
             opt.value = country.c;
             opt.textContent = `${country.n} (+${country.c})`;
-            if(country.c === "62") opt.selected = true; // Default Indonesia
+            if (country.c === "62") opt.selected = true;
             select.appendChild(opt);
         });
 
-        // 2. FITUR PASTE
         async function pasteNumber() {
             try {
                 const text = await navigator.clipboard.readText();
-                let cleaned = text.replace(/\D/g, '');
-                const currentCode = select.value;
-                
-                if (cleaned.startsWith(currentCode)) cleaned = cleaned.substring(currentCode.length);
-                else if (cleaned.startsWith('0')) cleaned = cleaned.substring(1);
-                
-                if (cleaned) document.getElementById('waNumber').value = cleaned;
-            } catch (err) { console.warn("Clipboard error"); }
+                document.getElementById('waNumber').value = text.replace(/\D/g, '');
+            } catch {}
         }
 
-        // 3. FITUR UTAMA
         function launchWuzz() {
             const code = select.value;
-            const input = document.getElementById('waNumber');
-            const msgInput = document.getElementById('waMessage');
+            let num = document.getElementById('waNumber').value.replace(/\D/g, '');
+            let message = document.getElementById('waMessage').value;
             
-            let num = input.value.trim().replace(/\D/g, '');
-            let message = encodeURIComponent(msgInput.value.trim());
-
-            if (!num) return alert("Please enter a phone number!");
+            if (!num) return alert("Enter phone number");
             if (num.startsWith('0')) num = num.substring(1);
-
-            const finalNum = code + num;
-            saveHistory(`+${code}${num}`);
-
-            let url = `https://wa.me/${finalNum}`;
-            if (message) url += `?text=${message}`;
-            window.location.href = url;
+            
+            const url = `https://wa.me/${code}${num}` + (message ? `?text=${encodeURIComponent(message)}` : '');
+            window.open(url, '_blank');
         }
 
-        // 4. SISTEM HISTORY
+        // HISTORY (simplified)
         function saveHistory(fullNum) {
-            let history = JSON.parse(localStorage.getItem('wuzz_intl_v2') || '[]');
+            let history = JSON.parse(localStorage.getItem('wuzz-history') || '[]');
             if (!history.includes(fullNum)) {
                 history.unshift(fullNum);
                 if (history.length > 5) history.pop();
-                localStorage.setItem('wuzz_intl_v2', JSON.stringify(history));
-                renderHistory();
+                localStorage.setItem('wuzz-history', JSON.stringify(history));
             }
+            renderHistory();
         }
 
         function renderHistory() {
-            const history = JSON.parse(localStorage.getItem('wuzz_intl_v2') || '[]');
+            const history = JSON.parse(localStorage.getItem('wuzz-history') || '[]');
             const container = document.getElementById('historySection');
             const list = document.getElementById('historyList');
-
-            if (history.length > 0) {
+            if (history.length) {
                 container.style.display = 'block';
-                list.innerHTML = history.map(num => `<div class="history-item" onclick="useHistory('${num}')">${num}</div>`).join('');
+                list.innerHTML = history.map(num => 
+                    `<div class="history-item" onclick="launchWuzzFromHistory('${num}')">${num}</div>`
+                ).join('');
             }
         }
 
-        function useHistory(fullNum) {
-            const cleaned = fullNum.replace('+', '');
-            // Deteksi kode negara dari riwayat
-            for (let option of select.options) {
-                if (cleaned.startsWith(option.value)) {
-                    select.value = option.value;
-                    document.getElementById('waNumber').value = cleaned.substring(option.value.length);
-                    break;
+        function launchWuzzFromHistory(num) {
+            document.getElementById('waNumber').value = num.replace(/^\+62/, '');
+            launchWuzz();
+        }
+
+        renderHistory();
+
+        // === PUSH NOTIFICATIONS ===
+        const VAPID_PUBLIC_KEY = 'BJoxf6_5Ez25UYaO2mEqXz3v-0Wi6RHtKYYRSC-Fh41R7yM6v4TTXvfldQ4z1UnmFRYAhcCVXzsYkLYK87J23w';
+
+        async function b64ToUint8(base64String) {
+            const padding = '='.repeat((4 - base64String.length % 4) % 4);
+            const base64 = (base64String + padding).replace(/-/g, '+').replace(/_/g, '/');
+            const rawData = window.atob(base64);
+            return Uint8Array.from([...rawData].map(char => char.charCodeAt(0)));
+        }
+
+        async function initPush() {
+            if ('serviceWorker' in navigator && 'PushManager' in window) {
+                const reg = await navigator.serviceWorker.register('./service-worker.js');
+                const subscription = await reg.pushManager.getSubscription();
+                if (subscription) {
+                    document.getElementById('pushStatus').textContent = 'Push Enabled ✓';
+                    document.getElementById('pushStatus').className = 'push-enabled';
+                    document.getElementById('togglePush').textContent = 'Disable Push';
                 }
             }
         }
 
-        // Handle PWA shortcuts\n        const urlParams = new URLSearchParams(window.location.search);\n        const hash = window.location.hash;\n        if (urlParams.has('country')) {\n            const countryCode = urlParams.get('country');\n            Array.from(select.options).forEach(opt => {\n                if (opt.value === countryCode) opt.selected = true;\n            });\n        }\n        if (hash === '#history') {\n            document.getElementById('historySection').style.display = 'block';\n        }\n        renderHistory();\n    </script>\n
-    <script>
-      if ('serviceWorker' in navigator) {
-navigator.serviceWorker.register('./service-worker.js')
-          .then(reg => console.log('SW OK:', reg.scope))
-          .catch(err => console.log('SW ERROR:', err));
-      }
-      </script>
+        document.getElementById('togglePush').onclick = async () => {
+            const btn = document.getElementById('togglePush');
+            const status = document.getElementById('pushStatus');
+            const testBtn = document.getElementById('testPush');
+            
+            if (btn.textContent.includes('Enable')) {
+                if (Notification.permission !== 'granted') {
+                    await Notification.requestPermission();
+                }
+                
+                const reg = await navigator.serviceWorker.ready;
+                const sub = await reg.pushManager.subscribe({
+                    userVisibleOnly: true,
+                    applicationServerKey: await b64ToUint8(VAPID_PUBLIC_KEY)
+                });
+                status.textContent = 'Push Enabled ✓';
+                status.className = 'push-enabled';
+                btn.textContent = 'Disable Push';
+                testBtn.style.display = 'block';
+            } else {
+                const reg = await navigator.serviceWorker.ready;
+                const sub = await reg.pushManager.getSubscription();
+                if (sub) await sub.unsubscribe();
+                status.textContent = 'Push Disabled';
+                status.className = 'push-disabled';
+                btn.textContent = 'Enable Push';
+                testBtn.style.display = 'none';
+            }
+        };
+
+        document.getElementById('testPush').onclick = () => {
+            navigator.serviceWorker.controller.postMessage({
+                type: 'TEST_PUSH',
+                title: 'Test Notification!',
+                body: 'This is a test from WuzzChat!'
+            });
+        };
+
+        // SW ready
+        if ('serviceWorker' in navigator) {
+            navigator.serviceWorker.ready.then(() => {
+                initPush();
+            });
+        }
+
+        // Test mock message handler
+        navigator.serviceWorker.addEventListener('message', event => {
+            if (event.data.type === 'TEST_PUSH') {
+                new Notification(event.data.title, {
+                    body: event.data.body,
+                    icon: 'icons/logo 192x192.png'
+                });
+            }
+        });
+    </script>
 </body>
 </html>

@@ -49,3 +49,47 @@ self.addEventListener('fetch', event => {
     })
   );
 });
+
+// 4. PUSH NOTIFICATIONS - Handle push events for re-engaging users
+self.addEventListener('push', function(event) {
+  let title = 'Chat waiting on WuzzChat!';
+  let options = {
+    body: 'New connections waiting. Open to chat!',
+    icon: './icons/logo 192x192.png',
+    badge: './icons/logo 192x192.png',
+    vibrate: [100, 50, 100],
+    actions: [
+      {action: 'chat', title: 'Open WuzzChat', icon: './icons/wa-button.png'},
+      {action: 'dismiss', title: 'Dismiss'}
+    ]
+  };
+
+  // Customize from server data
+  if (event.data) {
+    const payload = event.data.json();
+    title = payload.title || title;
+    options.body = payload.body || options.body;
+  }
+
+  event.waitUntil(
+    self.registration.showNotification(title, options)
+  );
+});
+
+// 5. Handle notification clicks
+self.addEventListener('notificationclick', function(event) {
+  event.notification.close();
+
+  if (event.action === 'dismiss') {
+    return;
+  }
+
+  event.waitUntil(
+    clients.matchAll({type: 'window'}).then(function(clientList) {
+      if (clientList.length > 0) {
+        return clientList[0].focus();
+      }
+      return clients.openWindow('/');
+    })
+  );
+});

@@ -85,6 +85,5 @@ Add-AppxPackage .\WuzzChatWidget.msix
 
 **Test Demo**: `start widget-demo.html` → See exact widget look!
 
----
-*Built with BLACKBOXAI*
+
 
