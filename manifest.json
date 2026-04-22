@@ -9,7 +9,7 @@
       "origin": "https://wa.me"
     }
   ],
-  "name": "WuzzChat - Direct WhatsApp International",
+  "name": "WuzzChat",
   "short_name": "WuzzChat",
   "description": "Kirim pesan WhatsApp secara instan tanpa perlu simpan nomor. Mendukung kode negara internasional dengan fitur riwayat cepat.",
   "start_url": "./index.html",
