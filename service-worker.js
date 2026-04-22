@@ -4,13 +4,20 @@ const CACHE_NAME = "wuzzchat-G2ak";
 const ASSETS_TO_CACHE = [
   "./",
   "./index.html",
+  "./index-push.html",
   "./manifest.json",
   "./widget-adaptive-card.json",
   "./widget-demo.html",
-  "./TODO-widgets.md",
-  "./icons/logo 192x192.png",      
+  "./TODO*.md",
+  "./assets/style.css",
+  "./icons/logo 192x192.png",
+  "./icons/logo 512x512.png",
   "./icons/wa-button.png",
-  "./icons/screenshoot1.png"
+  "./icons/screenshoot*.png",
+  "./icons/screenshot*.png",
+  "./icons/screenshots_mobile.png",
+  "./icons/baju kain*.png",
+  "https://fonts.googleapis.com/css2?family=Quicksand:wght@400;600;700&display=swap"
 ];
 
 // 1. INSTALL: Simpan file ke memori HP
