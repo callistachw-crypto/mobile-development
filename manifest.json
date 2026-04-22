@@ -158,7 +158,6 @@
   },
 
   "note_taking": {
-    "url": "./index.html?mode=note",
-    "label": "Send WhatsApp Note"
-  }
+  "new_note_url": "./index.html?mode=note"
+}
 }
