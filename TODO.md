@@ -1,7 +1,1 @@
-# TODO for Adding 'dir' to manifest.json (Completed)
-
-- [x] Step 1: Confirm plan with user
-- [x] Step 2: Edit manifest.json to add \"dir\": \"ltr\"
-- [x] Step 3: Validate JSON syntax (confirmed valid via read_file)
-- [x] Step 4: Complete task
-
+# Share Target Implementation Steps\n\n## Completed\n- [x] Create TODO.md with steps\n- [x] Add `share_target` to manifest.json\n\n## Remaining\n- [ ] Test: Serve app (e.g., `npx serve .`), install as PWA, share text/URL from Chrome/other app → verify app appears in share sheet\n- [ ] Implement share handling in index.html/JS (see TODO-share-handling.md)\n- [ ] Add `navigator.share` for sharing **from** app\n- [x] Created TODO-share-handling.md\n- [ ] Reload PWA (clear cache/reinstall) and re-test\n\nServe command: `npx serve . --listen 3000`
