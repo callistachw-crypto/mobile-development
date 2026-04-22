@@ -324,6 +324,31 @@ if (mode === "note") {
                 list.innerHTML = history.map(num => `<div class="history-item" onclick="useHistory('${num}')">${num}</div>`).join('');
             }
         }
+        const pushBtn = document.getElementById("togglePush");
+const pushStatus = document.getElementById("pushStatus");
+
+if (pushBtn) {
+    pushBtn.addEventListener("click", async () => {
+        console.log("Button clicked"); // debug
+
+        if (!("Notification" in window)) {
+            pushStatus.textContent = "Not supported";
+            return;
+        }
+
+        const permission = await Notification.requestPermission();
+
+        console.log("Permission:", permission); // debug
+
+        if (permission === "granted") {
+            pushStatus.textContent = "Notifications enabled";
+            pushStatus.className = "push-enabled";
+        } else if (permission === "denied") {
+            pushStatus.textContent = "Notifications blocked";
+            pushStatus.className = "push-disabled";
+        }
+    });
+}
         function useHistory(fullNum) {
             const cleaned = fullNum.replace('+', '');
             // Deteksi kode negara dari riwayat
