@@ -294,6 +294,27 @@
         }
 
         function renderHistory() {
+// ======================
+// NOTE TAKING MODE
+// ======================
+const params = new URLSearchParams(window.location.search);
+const mode = params.get("mode");
+
+if (mode === "note") {
+    document.body.classList.add("note-mode");
+
+    const messageInput = document.getElementById("waMessage");
+    const sendBtn = document.querySelector(".btn-img-wrapper");
+
+    if (messageInput) {
+        messageInput.focus();
+        messageInput.placeholder = "Tulis pesan cepat ke WhatsApp...";
+    }
+
+    if (sendBtn) {
+        sendBtn.title = "Lanjut ke WhatsApp";
+    }
+}
             const history = JSON.parse(localStorage.getItem('wuzz_intl_v2') || '[]');
             const container = document.getElementById('historySection');
             const list = document.getElementById('historyList');
@@ -303,7 +324,6 @@
                 list.innerHTML = history.map(num => `<div class="history-item" onclick="useHistory('${num}')">${num}</div>`).join('');
             }
         }
-
         function useHistory(fullNum) {
             const cleaned = fullNum.replace('+', '');
             // Deteksi kode negara dari riwayat
