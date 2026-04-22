@@ -194,7 +194,7 @@
         <div class="push-section" id="pushSection">
             <p class="push-title">Stay Updated</p>
             <div id="pushStatus" class="push-disabled">Notifications disabled</div>
-            <button id="togglePush">Enable Notifications</button>
+            <button id="togglePush" onclick="enableNotif()">Enable Notifications</button>
             <small style="opacity: 0.6; font-size: 0.7rem; margin-top: 0.5rem; display: block;">
                 Get timely reminders for new chats even when app is closed
             </small>
@@ -346,6 +346,24 @@ if (pushBtn) {
         } else if (permission === "denied") {
             pushStatus.textContent = "Notifications blocked";
             pushStatus.className = "push-disabled";
+        }
+    });
+}
+function enableNotif() {
+    console.log("CLICK HTML");
+
+    if (!("Notification" in window)) {
+        alert("Not supported");
+        return;
+    }
+
+    Notification.requestPermission().then(permission => {
+        console.log("Permission:", permission);
+
+        if (permission === "granted") {
+            alert("Notifications enabled!");
+        } else {
+            alert("Notifications blocked");
         }
     });
 }
