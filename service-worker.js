@@ -1,4 +1,4 @@
-const CACHE_NAME = "wuzzchat-v4";
+const CACHE_NAME = "wuzzchat-v5";
 const DB_NAME = "WuzzQueue";
 const STORE_NAME = "whatsapp";
 const PERIODIC_DB_STORE = "periodic-data";
