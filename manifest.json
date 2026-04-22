@@ -140,7 +140,7 @@
 
   "protocol_handlers": [
     {
-      "protocol": "wuzz",
+      "protocol": "web+wuzz",
       "title": "WuzzChat",
       "url": "./index.html?number=%s"
     }

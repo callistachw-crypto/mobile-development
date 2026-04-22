@@ -54,12 +54,16 @@ self.addEventListener("activate", event => {
 self.addEventListener("fetch", event => {
   event.respondWith(
     caches.match(event.request).then(cachedResponse => {
+
       const fetchPromise = fetch(event.request)
-        .then(networkResponse => {
+        .then(response => {
+          const responseClone = response.clone();
+
           caches.open(CACHE_NAME).then(cache => {
-            cache.put(event.request, networkResponse.clone());
+            cache.put(event.request, responseClone);
           });
-          return networkResponse;
+
+          return response;
         })
         .catch(() => {
           if (event.request.mode === "navigate") {
