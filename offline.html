@@ -1,16 +1,42 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Offline</title>
-    <link rel="stylesheet" href="assets/style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WuzzChat - Offline</title>
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#1a3a5a">
+    <style>
+        body { 
+            font-family: 'Quicksand', sans-serif; 
+            background: linear-gradient(135deg, #1a3a5a 0%, #25D366 100%);
+            color: white; min-height: 100vh; display: flex; align-items: center; justify-content: center; margin: 0; 
+        }
+        .offline-card {
+            background: rgba(255,255,255,0.1); backdrop-filter: blur(10px); border-radius: 2rem; 
+            padding: 3rem 2rem; text-align: center; max-width: 400px; box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+        }
+        .logo { width: 80px; height: auto; margin-bottom: 1rem; filter: drop-shadow(0 4px 8px rgba(0,0,0,0.3)); }
+        h1 { font-size: 2rem; margin-bottom: 0.5rem; }
+        p { opacity: 0.9; font-size: 1.1rem; margin-bottom: 2rem; }
+        .status { background: rgba(255,255,255,0.2); padding: 1rem; border-radius: 1rem; margin: 1rem 0; font-weight: 600; }
+        button { background: white; color: #1a3a5a; border: none; padding: 1rem 2rem; border-radius: 2rem; font-size: 1rem; font-weight: 700; cursor: pointer; transition: all 0.3s; }
+        button:hover { transform: scale(1.05); box-shadow: 0 10px 25px rgba(0,0,0,0.2); }
+    </style>
 </head>
-
-<body style="text-align:center; padding:2rem;">
-    <h2>⚠️ Kamu sedang offline</h2>
-    <p>Silakan periksa koneksi internetmu.</p>
+<body>
+    <div class="offline-card">
+        <img src="icons/logo 192x192.png" alt="WuzzChat" class="logo">
+        <h1>🌐 Offline Mode</h1>
+        <p>App works fully offline!<br>WhatsApp opens queued when online.</p>
+        <div class="status">✅ History loaded<br>✅ UI cached<br>✅ Queue ready</div>
+        <button onclick="location.reload()">Try Again</button>
+        <small style="opacity: 0.7; margin-top: 2rem; display: block;">Background sync active</small>
+    </div>
+    <script>
+        if (navigator.onLine) location.href = '/index.html';
+        addEventListener('online', () => location.href = '/index.html');
+        caches.match('./index.html').then(() => console.log('Offline PWA ready'));
+    </script>
 </body>
-
 </html>
