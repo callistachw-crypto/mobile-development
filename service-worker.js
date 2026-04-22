@@ -5,6 +5,9 @@ const ASSETS_TO_CACHE = [
   "./",
   "./index.html",
   "./manifest.json",
+  "./widget-adaptive-card.json",
+  "./widget-demo.html",
+  "./TODO-widgets.md",
   "./icons/logo 192x192.png",      
   "./icons/wa-button.png",
   "./icons/screenshoot1.png"

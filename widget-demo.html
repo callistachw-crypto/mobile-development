@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>WuzzChat Widget Demo</title>
+    <script src="https://unpkg.com/adaptivecards@2.20.0/dist/adaptivecards.min.js"></script>
+    <style>
+        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; padding: 20px; background: #f0f0f0; }
+        #cardHost { max-width: 300px; margin: 0 auto; background: white; border-radius: 10px; box-shadow: 0 4px 12px rgba(0,0,0,0.1); padding: 20px; }
+        h1 { text-align: center; color: #1a3a5a; margin-bottom: 30px; }
+    </style>
+</head>
+<body>
+    <h1>🪟 Windows Widget Preview</h1>
+    <div id="cardHost"></div>
+
+    <script>
+        const adaptiveCard = {
+            $schema: "http://adaptivecards.io/schemas/adaptive-card.json",
+            type: "AdaptiveCard",
+            version: "1.5",
+            body: [
+                {
+                    type: "Image",
+                    url: "icons/logo 192x192.png",
+                    size: "small",
+                    style: "person"
+                },
+                {
+                    type: "TextBlock",
+                    text: "WuzzChat",
+                    weight: "bolder",
+                    size: "large",
+                    color: "accent"
+                },
+                {
+                    type: "TextBlock",
+                    text: "Quick WhatsApp without saving contacts",
+                    weight: "bolder",
+                    size: "medium",
+                    wrap: true
+                },
+                {
+                    type: "TextBlock",
+                    text: "Recent: +628123456789",
+                    spacing: "small",
+                    size: "small",
+                    isSubtle: true,
+                    wrap: true
+                }
+            ],
+            actions: [
+                {
+                    type: "Action.OpenUrl",
+                    title: "New Chat",
+                    url: "index.html"
+                },
+                {
+                    type: "Action.OpenUrl",
+                    title: "Indonesia (+62)",
+                    url: "index.html?country=62"
+                },
+                {
+                    type: "Action.OpenUrl",
+                    title: "Recent",
+                    url: "index.html#history"
+                },
+                {
+                    type: "Action.OpenUrl",
+                    title: "WhatsApp",
+                    url: "https://wa.me/"
+                }
+            ]
+        };
+
+        const cardHost = new AdaptiveCards.AdaptiveCardHost(document.getElementById("cardHost"));
+        cardHost.renderCard(adaptiveCard);
+    </script>
+</body>
+</html>
+

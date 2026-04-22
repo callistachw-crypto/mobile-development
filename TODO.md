@@ -1,1 +1,14 @@
-# Share Target Implementation Steps\n\n## Completed\n- [x] Create TODO.md with steps\n- [x] Add `share_target` to manifest.json\n\n## Remaining\n- [ ] Test: Serve app (e.g., `npx serve .`), install as PWA, share text/URL from Chrome/other app → verify app appears in share sheet\n- [ ] Implement share handling in index.html/JS (see TODO-share-handling.md)\n- [ ] Add `navigator.share` for sharing **from** app\n- [x] Created TODO-share-handling.md\n- [ ] Reload PWA (clear cache/reinstall) and re-test\n\nServe command: `npx serve . --listen 3000`
+# Widget Implementation Progress
+
+## Plan Steps
+- [x] 1. Create `widget-adaptive-card.json` (Adaptive Card JSON for Windows Widget)
+- [x] 2. Create `widget-demo.html` (Interactive demo using AdaptiveCards SDK)
+- [x] 3. Create `TODO-widgets.md` (Developer guide for native WinUI widget setup)
+- [x] 4. Update `manifest.json` (Add widget-related fields, validate)
+- [x] 5. Enhance `index.html` (Optional: Better history sync for widget actions)
+- [x] 6. Update service-worker.js if needed (Cache new assets)
+- [ ] 7. Test PWA install and widget demo
+- [ ] 8. Complete: Deploy guide in README.md
+
+**Current Status**: Service worker updated to cache widget assets. PWA enhanced. Progress: 6/8 steps.
+
