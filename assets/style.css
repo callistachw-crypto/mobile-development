@@ -108,3 +108,8 @@ body.note-mode .history-section,
 body.note-mode .push-section {
   display: none;
 }
+@media (display-mode: window-controls-overlay) {
+  body {
+    padding-top: env(titlebar-area-height);
+  }
+}
