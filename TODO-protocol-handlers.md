@@ -1,0 +1,1 @@
+# TODO for Adding 'protocol_handlers' to manifest.json (Completed)\n\n- [x] Step 1: Added protocol_handlers for 'wuzz://number' scheme\n- [x] Step 2: JS ready to parse %s param into phone number field\n- [x] Step 3: Complete task\n\n**Test: wuzz://628123456789 opens app with number prefilled.**
