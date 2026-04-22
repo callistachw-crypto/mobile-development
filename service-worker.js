@@ -1,4 +1,4 @@
-const CACHE_NAME = "wuzzchat-G2ak";
+const CACHE_NAME = "wuzzchat-v3";
 
 // Perbaikan: Mendefinisikan variabel yang tadi hilang/terpotong
 const ASSETS_TO_CACHE = [
@@ -13,12 +13,7 @@ const ASSETS_TO_CACHE = [
   "./icons/logo 192x192.png",
   "./icons/logo 512x512.png",
   "./icons/wa-button.png",
-  "./icons/screenshoot*.png",
-  "./icons/screenshot*.png",
-  "./icons/screenshots_mobile.png",
-  "./icons/baju kain*.png",
-  "https://fonts.googleapis.com/css2?family=Quicksand:wght@400;600;700&display=swap"
-];
+  "./icons/screenshoot2.png", "./icons/screenshot1.png", "./icons/screenshot2.png", "./icons/screenshots_mobile.png", "./icons/baju kain 1.png", "./icons/baju kain 2.png",  "./icons/baju kain 3.png",  "https://fonts.googleapis.com/css2?family=Quicksand:wght@400;600;700&display=swap"];
 
 // 1. INSTALL: Simpan file ke memori HP
 self.addEventListener('install', event => {
